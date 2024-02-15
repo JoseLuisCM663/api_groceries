@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <title>Abarrotes Doña pelos</title>
+</head>
+<body>
+    <div data-role="page" data-theme="b" id="two">
+        <div data-role="header">
+            <h1>Abarrotes TI</h1>
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#" data-icon="home">Inicio</a></li>
+                    <li><a href="#" data-icon="eye" class="ui-btn-active">Productos</a></li>
+                    <li><a href="#" data-icon="user">Empleados</a></li>
+                </ul>
+            </div>
+        </div>
+        <div role="main" class="ui-content">
+            <h2>Actualizar Productos</h2>
+            <form  action="/api/products/d/<%= product.barcode %>" method="post">
+                <input type="text" name="barcode" value="<%=product.barcode %>">
+                <input type="text" name="description" value="<%=product.description %>">
+                <input type="text" name="brand" value="<%=product.brand %>">
+                <input type="number" name="price" value="<%=product.price %>">
+                <input type="number" name="cost" value="<%=product.cost %>">
+                <input type="number" name="stock" value="<%=product.stock %>">
+                <input type="date" name="expiredDate" value="<%=product.expiredDate %>">
+                <label for="flip-6">Estado</label>
+                <select name="status" id="status" data-role="slider" data-mini="true">
+                    <option value="0" <%= product.status=0?"selected":"" %>>No</option>
+                    <option value="1"<%= product.status=1?"selected":"" %>>Si</option>
+                </select>
+                <button type="submit" id="submit-6" class="ui-shadow ui-btn ui-corner-all ui-mini">Eliminar</button>
+            </form>
+                </div>
+                    
+            </div>
+        <div data-role="footer">
+            <h1>Jose Luis</h1>
+        </div>
+</body>
+</html>

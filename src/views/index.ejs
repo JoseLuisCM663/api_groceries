@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <title>Abarrotes Doña pelos</title>
+</head>
+<body>
+    <div data-role="page" data-theme="b" id="one">
+        <div data-role="header">
+            <h1>Abarrotes TI</h1>
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#" data-icon="home">Inicio</a></li>
+                    <li><a href="#" data-icon="eye" class="ui-btn-active">Productos</a></li>
+                    <li><a href="#" data-icon="user">Empleados</a></li>
+                </ul>
+            </div>
+        </div>
+        <div role="main" class="ui-content">
+            <h2>Registrar Productos</h2>
+            <form  action="/api/products" method="POST">
+                <input type="text" name="barcode" placeholder="Codigo de barras">
+                <input type="text" name="description" placeholder="Descripcion">
+                <input type="text" name="brand" placeholder="Marca">
+                <input type="number" name="price" placeholder="Precio de compra">
+                <input type="number" name="cost" placeholder="Precio de venta">
+                <input type="number" name="stock" placeholder="Existencias">
+                <input type="date" name="expiredDate">
+                <label for="flip-6">Estado</label>
+                <select name="status" id="status" data-role="slider" data-mini="true">
+                    <option value="0">No</option>
+                    <option value="1">Si</option>
+                </select>
+                <button type="submit" id="submit-6" class="ui-shadow ui-btn ui-corner-all ui-mini">Enviar</button>
+            </form>
+            <h2>Lista de Productos</h2>
+            <form>
+                <input data-type="search" id="searchForCollapsibleSetChildren">
+            </form>
+            <div data-role="collapsibleset" data-filter="true" data-children="> div, > div div ul li" data-inset="true" id="collapsiblesetForFilterChildren" data-input="#searchForCollapsibleSetChildren">
+                <% products.forEach((product) => { %>
+                    <div data-role="collapsible" data-filtertext="<%= product.description %>">
+                        <h1><%= product.description %></h1>
+                        <ul data-role="listview" data-inset="false">
+                            <li>Codigo de barras:<%= product.barcode %></li>
+                            <li>Marca:<%= product.brand %></li>
+                            <li>Precio de compra:<%= product.price %></li>
+                            <li>Precio de venta:<%= product.cost %></li>
+                            <li>Existencias:<%= product.stock %></li>
+                            <li>Fecha de caducidad:<%= product.expiredDate %></li>
+                            <li>Estatus:<%= product.status %></li>
+                            <form action="/api/products/<%= product.barcode %>/delete" method="POST">
+                                <a href="/api/products/<%= product.barcode %>" class="ui-btn ui-btn-inline">Editar</a>
+                                <button type="submit" class="ui-btn ui-btn-inline">Eliminar</button>
+                            </form>
+                        </ul>
+                    </div>
+                <% }) %>
+                    </div>
+                </div>
+                    
+            </div>
+
+</body>
+</html>
